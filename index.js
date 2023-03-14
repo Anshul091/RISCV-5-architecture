@@ -9076,6 +9076,7 @@ var venus_main = function(t, M) {
 
 
 
+
 var inputString = "";
 var instList = "";
 var filechoosen = false;
@@ -9084,8 +9085,6 @@ var wrong_code = false;
 
 function inputStringParser() {
     let parsedString = "";
-    for(let i = 0; i<100; i++) inputString = inputString.trim();
-    inputString = inputString + '\n';
     let lines = inputString.split("\n");
     let lineNo = 0;
     for (let i = 0; i < lines.length; i++) {
@@ -9775,7 +9774,7 @@ function RFSync(rf, format){
     let registerFile = document.querySelectorAll(".register-value");
     for(let i = 1; i<registerFile.length; i++){
       let value = rf[i-1];
-      value = value<0?value-(0xffffffff+1):value;
+      value = value<0?value+(0xffffffff+1):value;
       if(format === 'hex') value = value.toString(16);
       else if(format === 'dec') value &= 0xffffffff;
       registerFile[i].textContent = `${(format==='hex'?'0x':'')}${value}`;
@@ -9850,6 +9849,7 @@ class Simulator {
         this.IMM = 0;       // Stores immediate value
         this.ALURESULT = 0; // Stores result of ALU or Memory value
         this.MEMORY = {};
+        this.RF[2] = 2147483632;
         // Now creating Instruction div elements
         for (let i = 0; i < instList.length; i++) {
             // console.log(i);
@@ -9911,6 +9911,8 @@ class Simulator {
       let obj2 = decode2(this.INSTRUCTION);
       let ins_to_print = print_ins(obj2);
       document.getElementById("instruction-rowd-"+(this.PC)).innerText = ins_to_print;
+      for(let i = 0; i<oper.length; i++) oper[i] *= this.PC+1;
+      timelineAppendRow(this.CYCLE+1, oper);
       this.execute();
       if(oper[3] != 0)
       this.memoryAccess();
@@ -9924,13 +9926,11 @@ class Simulator {
             RFSync(this.RF , numberFormat);
       this.CYCLE += 1;
       document.querySelector(".cycle-count").innerHTML = this.CYCLE;
-      if(this.CYCLE > 100000){ 
+      if(this.CYCLE > 10000){ 
+          wrong_code = true;
           alert("Infinite loop");
           location.reload();
-          wrong_code = true;
       }
-      for(let i = 0; i<oper.length; i++) oper[i] *= this.CYCLE;
-      timelineAppendRow(this.CYCLE, oper);
     }
 
 
@@ -10058,8 +10058,8 @@ class Simulator {
             else this.PC+= 1;
             break;
           case "jal":
-            this.ALURESULT = 4 * (this.PC + 1);
-            this.PC += (imm >> 2);
+              this.ALURESULT = 4 * (this.PC + 1);
+              this.PC += (imm >> 2);
             break;
           case "jalr":
             this.ALURESULT = 4 * (this.PC + 1);
@@ -10075,13 +10075,13 @@ class Simulator {
                 console.error("Error");
                 break;
         }
-        if(this.OP[0] != "b" && this.OP != "j") this.PC += 1;
+        if(this.OP[0] != "b" && this.OP[0] != "j") this.PC += 1;
         console.log(this.ALURESULT);
     }
 
     memoryAccess() {
         function numberToHexString(number) {
-            let hexString =  (number<0? number-(0xffffffff+1):number).toString(16);
+            let hexString =  (number<0? number+(0xffffffff+1):number).toString(16);
             while (hexString.length < 8) hexString = "0" + hexString;
             return hexString;
         }
@@ -10107,15 +10107,14 @@ class Simulator {
             let hexNum = '';
             switch(this.OP[1]){
                 case 'w':
-                    hexNum += this.MEMORY[address+3]===undefined?'00':this.MEMORY[address+3]  + this.MEMORY[address+2]===undefined?'00':this.MEMORY[address+2];
+                    hexNum += (this.MEMORY[address+3]===undefined?'00':this.MEMORY[address+3])  + (this.MEMORY[address+2]===undefined?'00':this.MEMORY[address+2]);
                 case 'h':
                     hexNum += this.MEMORY[address+1]===undefined?'00':this.MEMORY[address+1];
                 default:
                     hexNum += this.MEMORY[address]===undefined?'00':this.MEMORY[address];
             }
-
             let decimalNumber = parseInt(hexNum, 16);
-            if(this.OP[2]!=='u'){
+            if(this.OP[2] == 'u'){
               switch(this.OP[1]){
                 case 'b':
                   if(decimalNumber & 0x80) decimalNumber -= 0xff+1;
@@ -10217,7 +10216,7 @@ function addRow(){
 
 function memSync(memory, format){
     function numberToHexString(number) {
-        let hexString = (number<0? number-(0xffffffff+1):number).toString(16);
+        let hexString = (number<0? number+(0xffffffff+1):number).toString(16);
         while (hexString.length < 8) hexString = "0" + hexString;
         return hexString;
     }
