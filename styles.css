@@ -27,6 +27,7 @@ header{
   height: 12vh;
   display:flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 
@@ -54,15 +55,15 @@ color: white;
 }
 
 .slidecontainer {
-width: 100%;
-display: flex;
-align-items: center;
+width: 20vw;
+/* display: flex; */
+/* align-items: center; */
 font-size: 1.3rem;
 font-family: monospace;
 }
 .slidecontainer>span {
 width: 10%;
-text-align: center;
+/* text-align: center; */
 }
 
 .slider {
@@ -142,7 +143,7 @@ display: flex;
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 1.5rem;
+font-size: 1rem;
 border: 1px solid black;
 color: black;
 }
@@ -340,15 +341,22 @@ display: block;
 box-shadow: rgb(147, 147, 147) -3px 3px 9px 0px;;
 }
 
+.register-heading-container, .memory-heading-container {
+  width: 100%;
+  /* height: 12%; */
+  z-index: 10;
+  /* background-attachment: black; */
+}
+
 .register-container {
 width: 100%;
-height: 100%;
+height: 90%;
 background-color: #e5e1e1;
 }
 
 .memory-container {
 width: 100%;
-height: 100%;
+height: 90%;
 /* background-color: pink; */
 }
 
@@ -462,4 +470,81 @@ display: block;
 
 .dropup:hover .dropbtn {
 background-color: #5539d3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root{
+  --bgColor : #E9EDC9;
+  --bgColorLight : #CCD5AE;
+  --textColor : #0E8388;
+  --textColorDark : #0E8388;
+  --paperColor: #E9EDC9;
+  --paperColorDark: #CCD5AE;
+
+}
+
+::selected{
+  color: var(--textColorDark);
+}
+
+.instructions-cycle-wrapper{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#thefile{
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+}
+
+label.file{
+  display: inline-block;
+  /* transform: translate3d(-50%, -50%, 0); */
+  /* padding: .7rem 1.5rem; */
+  height: 100%;
+  width: 25vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 1.25em;
+  font-weight: 700;
+  box-shadow: 20px 20px 50px grey;
+  cursor: pointer;
+}
+
+label.file:hover{
+    background: var(--paperColorDark);
+    transform: translate3d(0%, -5%, 0);
+}
+
+label.file:active{
+    background: var(--paperColorDark);
+    transform: translate3d(0%, 5%, 0);
+}
+
+label.file.normal{
+  transform: translate3d(10%, 50%, 0);
+  /* padding: 0.2rem 2rem; */
+  font-size: 1rem;
+  top: 0;
+  left: 0;
 }
