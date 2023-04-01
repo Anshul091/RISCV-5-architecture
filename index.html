@@ -9,21 +9,57 @@
 </head>
 <body>
     <header>
-        <div class="control-buttons">
-            <button class="step">STEP</button>
-            <button class="run">RUN</button>
-            <button class="reset">RESET</button>
+        <div class="header-left">
+            <div class="control-buttons">
+                <button class="step">STEP</button>
+                <button class="run">RUN</button>
+                <button class="reset">RESET</button>
+            </div>
+            <div class="file-chooser-and-slidercontainer">
+                <div class="file-chooser">
+                    <!-- <span>Select Machine<br>Code File (*.mc): </span>
+                    <input type="file" id="file-chooser" accept=".mc"> -->
+                    <label for="thefile" class="file">Choose .mc file
+                        <input type="file" id="thefile" accept="." />
+                      </label>
+                </div>
+                <div class="slidecontainer">
+                    <span>Speed:</span>
+                    <input id="speed" type="range" min="1" max="100" value="50">
+                    <span id="speed-value">50</span>
+                </div>
+            </div>
         </div>
-        <div class="file-chooser">
-            <!-- <span>Select Machine<br>Code File (*.mc): </span>
-            <input type="file" id="file-chooser" accept=".mc"> -->
-            <label for="thefile" class="file">Choose .mc file
-                <input type="file" id="thefile" accept="." />
-              </label>
-        </div>
-        <div class="slidecontainer">
-            <span>Speed:</span>
-            <input id="speed" type="range" min="1" max="100" value="50">
+        <div class="header-right">
+            <div class="knobs-heading-container">
+                <div class="knobs-header">Pipeline</div>
+                <div class="knobs-header">Data Forwarding</div>
+                <div class="knobs-header">Register File</div>
+                <div class="knobs-header">Pipeline registers info</div>
+                <div class="knobs-header">Custom instruction</div>
+            </div>
+            <div class="knobs-container">
+                <div class="toggle toggle1">
+                    <input type="checkbox" id="toggle1"/>
+                    <label for="toggle1"></label>
+                </div>
+                <div class="toggle toggle2">
+                    <input type="checkbox" id="toggle2"/>
+                    <label for="toggle2"></label>
+                </div>
+                <div class="toggle toggle3">
+                    <input type="checkbox" id="toggle3" checked/>
+                    <label for="toggle3"></label>
+                </div>
+                <div class="toggle toggle4">
+                    <input type="checkbox" id="toggle4" checked/>
+                    <label for="toggle4"></label>
+                </div>
+                <div class="toggle toggle5">
+                    <input type="checkbox" id="toggle5" />
+                    <label for="toggle5"></label>
+                </div>
+            </div>
         </div>
     </header>
     <content>
@@ -39,8 +75,18 @@
             </div>
 
             <div class="instructions-cycle-wrapper">
-                <span>Cycles:</span>
-                <span class="cycle-count">0</span>
+                <div>
+                    <span>Cycles:</span>
+                    <span id="cycle-count">0</span>
+                </div>
+                <div>
+                    <span>Instructions:</span>
+                    <span id="instruction-count">0</span>
+                </div>
+                <div>
+                    <span>CPI:</span>
+                    <span id="cpi-count">0</span>
+                </div>
             </div>
 
         </div>
@@ -120,13 +166,64 @@
                     <button class="dropbtn">Number Format</button>
                     <div class="dropup-content">
                       <div id="but-hex">Hexadecimal</div>
-                      <div id="but-dec">Decimal</div>
+                      <div id="but-dec">Decimal</div>   
                       <div id="but-udec">Unsigned</div>
                     </div>
                 </div>
             </div>
         </div>
-            
+        
+        <div class="stats-pane">
+            <h2>Statistics</h2>
+            <div class="stats-box">
+                <table class="table-fill">
+                    <thead>
+                    <tr>
+                    <th class="text-left">Type</th>
+                    <th class="text-left">Number</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-hover">
+                        <tr>
+                            <td class="text-left">Data-transfer Instructions</td>
+                            <td id="stat-0" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">ALU Instructions</td>
+                            <td id="stat-1" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Control Instructions</td>
+                            <td id="stat-2" class="text-left">0</td>
+                        </tr>
+                            <td class="text-left">Data Hazards</td>
+                            <td id="stat-3" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Control Hazards</td>
+                            <td id="stat-4" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Branch Mispredictions</td>
+                            <td id="stat-5" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Total Stalls</td>
+                            <td id="stat-6" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Data hazards stalls</td>
+                            <td id="stat-7" class="text-left">0</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Control hazards stalls</td>
+                            <td id="stat-8" class="text-left">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </content>
     <script src="index.js"></script>
 
