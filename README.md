@@ -13,7 +13,7 @@ RISC-V Simulator
 * [Kapil Mittal](https://github.com/KK-Mittal)
 
 ## How to run
-Just clone the repo and open the `index.html` file in any browser. The simulator is also hosted [here](https://theviking733n.github.io/RISC-V-Simulator/). Then go to choose mc file and select any of the mc files in the `tests` folder. Then click on the `Run` / `Step` button to run the simulator. There is a `Statistics` column on the right side which shows the number of instructions executed, number of cycles, CPI, etc.
+Just clone the repo and open the `index.html` file in any browser. The simulator is also hosted [here](https://anshul091.github.io/RISCV-5-architecture/). Then go to choose mc file and select any of the mc files in the `tests` folder. Then click on the `Run` / `Step` button to run the simulator. There is a `Statistics` column on the right side which shows the number of instructions executed, number of cycles, CPI, etc.
 
 
 ## [License](/LICENSE)
