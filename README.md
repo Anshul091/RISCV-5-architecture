@@ -1,5 +1,5 @@
 RISC-V Simulator
-
+<img width="1356" alt="RISC-V architecture image-min" src="https://github.com/Anshul091/RISCV-5-architecture/assets/112956069/b01d0b32-ea88-459e-b9da-920e239dd85d">
 
 > Simple web based Functional Simulator for RISC-V ISA. This project was done as a part of the course project for CS204 Computer Architecture at IIT Ropar. Here is the [link](https://anshul091.github.io/RISCV-5-architecture/) to the simulator.
 
@@ -8,8 +8,7 @@ RISC-V Simulator
 
 ## Team Members
 * [Anshul Mittal](https://github.com/Anshul091)
-* [Piyush Kumar](https://github.com/piuspk)<img width="1356" alt="RISC-V architecture image-min" src="https://github.com/Anshul091/RISCV-5-architecture/assets/112956069/b01d0b32-ea88-459e-b9da-920e239dd85d">
-
+* [Piyush Kumar](https://github.com/piuspk)
 * [Chetan Kamble](https://github.com/kamble268)
 * [Kapil Mittal](https://github.com/KK-Mittal)
 
